@@ -84,12 +84,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'HelloWorld',
+  methods: mapActions([ 'getEvents' ]),
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created () {
+    this.getEvents()
   }
 }
 </script>

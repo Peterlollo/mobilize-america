@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h2>Events</h2>
+    <div v-if='events.length'>{{ events }}</div>
+    <div v-else>Pardon us, there's an error somewhere. Please try again.</div>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -84,11 +87,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'HelloWorld',
   methods: mapActions([ 'getEvents' ]),
+  computed: mapGetters([ 'events' ]),
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

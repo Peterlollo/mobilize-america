@@ -1,6 +1,7 @@
 export const events = state => state.events.events
 export const error = state => state.events.error
 export const months = state => state.events.months
+export const days = state => state.events.days
 export const upcomingEvents = state => {
   let events = state.events.events
   let now = new Date().toISOString()

@@ -3,8 +3,8 @@
     <div class='container'>
       <img src="./assets/logo.png">
       <div class='main-row'>
-        <router-view name='sidebar'/>
-        <router-view name='main'/>
+        <router-view name='sidebar' id='router-sidebar'/>
+        <router-view name='main' id='router-main'/>
       </div>
     </div>
   </div>
@@ -51,12 +51,51 @@ html, body {
   display: flex;
   flex-direction: row;
 }
+#router-sidebar {
+  flex: 1;
+}
+#router-main {
+  flex: 2;
+}
 
 h1, h2 {
   font-weight: normal;
 }
 a {
   color: #42b983;
+}
+.btn {
+  border: none;
+  border-radius: 2px;
+  background-color: #26a69a;
+  color: #fff;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 2rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 1.35rem;
+  outline: 0;
+  cursor: pointer;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.btn:hover {
+  background-color: #2bbbad;
+}
+
+.btn-secondary {
+  background-color: #319ad4;
+}
+
+input {
+  padding: 15px;
+  background: rgba(255,255,255,0.5);
+  margin: 0 0 10px 0;
+  width: 100px;
+  font-size: 1.35rem;
 }
 
 /*********** Media Queries  **********/

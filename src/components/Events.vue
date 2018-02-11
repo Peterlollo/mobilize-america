@@ -1,12 +1,14 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div id='events-list'>
-      <h2>Upcoming Events</h2>
-      <div v-if='sortedEvents.length' id='events-table'>
-        <EventSingle v-for='event in sortedEvents' :event='event' :key='event.id'/>
+  <div>
+    <div id="events">
+      <h1>{{ msg }}</h1>
+      <div id='events-list'>
+        <h2>Upcoming Events</h2>
+        <div v-if='sortedEvents.length' id='events-table'>
+          <EventSingle v-for='event in sortedEvents' :event='event' :key='event.id'/>
+        </div>
+        <div v-else>Pardon us, there's an error somewhere. Please try again.</div>
       </div>
-      <div v-else>Pardon us, there's an error somewhere. Please try again.</div>
     </div>
   </div>
 </template>
@@ -17,7 +19,7 @@ import EventSingle from './EventSingle'
 import { sortRecurringEventsByDate } from '../helpers/eventHelpers'
 
 export default {
-  name: 'EventsList',
+  name: 'Events',
   methods: mapActions([ 'getEvents' ]),
   computed: {
     sortedEvents () {
@@ -28,7 +30,7 @@ export default {
   components: { EventSingle },
   data () {
     return {
-      msg: 'Welcome to Your Events List'
+      msg: 'Events List'
     }
   },
   created () {
@@ -38,4 +40,8 @@ export default {
 </script>
 
 <style scoped>
+#events {
+  margin: 30px 0 0 0;
+  padding: 10px 0 50px 0;
+}
 </style>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import EventsList from '@/components/EventsList'
-import SidebarFilter from '@/components/SidebarFilter'
+import Events from '@/components/Events'
+import Sidebar from '@/components/Sidebar'
 
 Vue.use(Router)
 
@@ -11,8 +11,8 @@ export default new Router({
       path: '/',
       name: 'home',
       components: {
-        sidebar: SidebarFilter,
-        main: EventsList
+        sidebar: Sidebar,
+        main: Events
       }
     }
   ]

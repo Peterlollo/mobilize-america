@@ -1,7 +1,8 @@
 <template>
   <div id='single-event'>
     <div class='time'>
-      {{ event.times[0].start }}
+      <h2>{{ time.month }}</h2>
+      <h1>{{ time.day }}</h1>
     </div>
     <div class='name'>
       {{ event.name }}
@@ -20,9 +21,12 @@ import {mapGetters} from 'vuex'
 export default {
   props: ['event'],
   computed: {
-    // month () {
-    //   return this.event.times
-    // }
+    time () {
+      let t = new Date(this.event.times[0].start)
+      let month = this.months[t.getMonth()]
+      let day = t.getDate()
+      return { month, day }
+    },
     ...mapGetters(['months'])
   }
 
@@ -33,5 +37,9 @@ export default {
 #single-event {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+#single-event > * {
+  margin: 0 5px;
 }
 </style>

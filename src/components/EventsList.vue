@@ -2,9 +2,9 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div id='events-list'>
-      <h2>Events</h2>
-      <div v-if='events.length'>
-        <EventSingle :event='events[0]'/>
+      <h2>Upcoming Events</h2>
+      <div v-if='sortedEvents.length' id='events-table'>
+        <EventSingle v-for='event in sortedEvents' :event='event' :key='event.id'/>
       </div>
       <div v-else>Pardon us, there's an error somewhere. Please try again.</div>
     </div>
@@ -14,15 +14,21 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import EventSingle from './EventSingle'
+import { sortRecurringEventsByDate } from '../helpers/eventHelpers'
 
 export default {
-  name: 'HelloWorld',
+  name: 'EventsList',
   methods: mapActions([ 'getEvents' ]),
-  computed: mapGetters([ 'events' ]),
+  computed: {
+    sortedEvents () {
+      return sortRecurringEventsByDate(this.upcomingEvents)
+    },
+    ...mapGetters([ 'events', 'upcomingEvents' ])
+  },
   components: { EventSingle },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Events List'
     }
   },
   created () {
@@ -31,20 +37,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

@@ -2,7 +2,8 @@ import {GET_EVENTS_SUCCESS, GET_EVENTS_FAILURE} from './types'
 
 const state = {
   error: null,
-  events: []
+  events: [],
+  months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 }
 
 const mutations = {

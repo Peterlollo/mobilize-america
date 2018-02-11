@@ -1,31 +1,37 @@
 <template>
   <div id='single-event'>
-    <h4>Single Event</h4>
-    <div class='event-row'>
-      <div>description: </div>
+    <div class='time'>
+      {{ event.times[0].start }}
+    </div>
+    <div class='name'>
+      {{ event.name }}
+    </div>
+    <div class='description'>
       <div>{{ event.description }}</div>
     </div>
-    <div class='event-row'>
-      <div>location: </div>
-      <div>{{ event.location }}</div>
+    <div class='city'>
+      <div>{{ event.location.city }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  props: [ 'event' ]
+  props: ['event'],
+  computed: {
+    // month () {
+    //   return this.event.times
+    // }
+    ...mapGetters(['months'])
+  }
+
 }
 </script>
 
 <style scoped>
 #single-event {
   display: flex;
-  flex-direction: column;
-}
-.event-row {
-  display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 </style>

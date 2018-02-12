@@ -49,13 +49,13 @@ html, body {
 }
 .main-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 #router-sidebar {
-  flex: 1;
+  /*flex: 1;*/
 }
 #router-main {
-  flex: 2;
+  /*flex: 2;*/
 }
 
 h1, h2 {
@@ -107,6 +107,15 @@ input {
 @media (min-width: 768px) {
   #app > .container {
     width: 750px;
+  }
+  .main-row {
+    flex-direction: row;
+  }
+  #router-sidebar {
+    flex: 1;
+  }
+  #router-main {
+    flex: 2;
   }
 }
 

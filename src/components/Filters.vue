@@ -11,7 +11,7 @@
           v-on:click='setZipcode(option.distance)'
           :key='option.distance'
           class='btn btn-secondary'>
-          Less than {{option.distance}}
+          Less than {{option.distance}} miles
         </button>
       </div>
     </div>

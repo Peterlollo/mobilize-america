@@ -42,4 +42,13 @@ export default {
 #single-event > * {
   margin: 0 5px;
 }
+.description {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .description {
+    display: block;
+  }
+}
 </style>

@@ -1,14 +1,25 @@
+import {
+  GET_EVENTS_SUCCESS,
+  GET_EVENTS_FAILURE,
+  FILTER_BY_ZIPCODE,
+  CLEAR_ZIPCODE
+} from './types'
 import axios from 'axios'
 
-export const getEvents = () => {
+export const getEvents = ({commit}) => {
   axios.get('https://mobilize-mock-api.herokuapp.com/api/events')
-    .then(response => {
-    // JSON responses are automatically parsed.
-      // this.posts = response.data
-      console.log('response: ', response)
+    .then(events => {
+      commit(GET_EVENTS_SUCCESS, events)
     })
     .catch(e => {
-      // this.errors.push(e)
+      commit(GET_EVENTS_FAILURE, e)
       console.log('error: ', e)
     })
+}
+
+export const filterByZipcode = ({commit}, settings) => {
+  commit(FILTER_BY_ZIPCODE, settings)
+}
+export const clearZipcode = ({commit}, zip) => {
+  commit(CLEAR_ZIPCODE)
 }

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Events from '@/components/Events'
+import Sidebar from '@/components/Sidebar'
+import Map from '@/components/Map'
 
 Vue.use(Router)
 
@@ -8,8 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'home',
+      components: {
+        sidebar: Sidebar,
+        main: Events
+      }
+    },
+    {
+      path: '/map',
+      name: 'map',
+      components: {
+        main: Map
+      }
     }
   ]
 })

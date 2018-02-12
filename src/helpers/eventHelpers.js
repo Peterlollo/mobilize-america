@@ -15,7 +15,6 @@ export const filterEventsByZipcode = (zipcode, distance, events) => {
     if (!eventZipcode) {
       return false
     } else {
-      console.log('Z>>>', zipcodes.distance(zipcode, e.location.zipcode))
       return zipcodes.distance(zipcode, e.location.zipcode) < distance
     }
   })

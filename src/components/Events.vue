@@ -1,9 +1,21 @@
 <template>
   <div>
     <div id="events">
-      <h1>{{ msg }}</h1>
+      <h1>Events</h1>
       <div id='events-list' v-if='this.events.length'>
-        <h2>Upcoming Events</h2>
+        <div class='view-options'>
+          <button class='btn btn-secondary'
+            :class='{deactivated: mapShowing}'
+            v-on:click='hideMap'>
+            Event List
+          </button>
+          <button class='btn btn-secondary'
+            :class='{deactivated: !mapShowing}'
+            v-on:click='showMap'>
+            Event Map
+          </button>
+        </div>
+        <h2>{{msg}}</h2>
         <div v-if='eventsToShow.length' id='events-table'>
           <EventSingle v-for='event in eventsToShow' :event='event' :key='event.id'/>
         </div>
@@ -21,7 +33,15 @@ import { sortRecurringEventsByDate, filterEventsByZipcode } from '../helpers/eve
 
 export default {
   name: 'Events',
-  methods: mapActions([ 'getEvents' ]),
+  methods: {
+    showMap () {
+      this.mapShowing = true
+    },
+    hideMap () {
+      this.mapShowing = false
+    },
+    ...mapActions([ 'getEvents' ])
+  },
   computed: {
     eventsToShow () {
       let zipcode = this.zipcodeSettings.zipcode
@@ -36,7 +56,8 @@ export default {
   components: { EventSingle },
   data () {
     return {
-      msg: 'Events List'
+      mapShowing: false,
+      msg: 'Upcoming Events'
     }
   },
   created () {
@@ -49,5 +70,8 @@ export default {
 #events {
   margin: 30px 0 0 0;
   padding: 10px 0 50px 0;
+}
+.deactivated {
+  background-color: #eee;
 }
 </style>

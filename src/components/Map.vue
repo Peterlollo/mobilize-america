@@ -80,8 +80,13 @@ export default {
   justify-content: center;
 }
 .map-container {
-  min-width: 500px;
-  min-height: 300px;
-  max-width: 700px;
+  width: 350px;
+  height: 300px;
+}
+@media (min-width: 768px) {
+  .map-container {
+    width: 550px;
+    height: 400px;   
+  }
 }
 </style>

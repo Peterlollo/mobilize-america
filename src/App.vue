@@ -1,12 +1,13 @@
 <template>
-  <div id="app">
+  <div id='app'>
     <div class='container'>
-      <img src="./assets/logo.png">
+      <img src='./assets/logo.png' class='logo'>
       <div class='main-row'>
         <router-view name='sidebar' id='router-sidebar'/>
         <router-view name='main' id='router-main'/>
       </div>
     </div>
+    <footer id='footer'></footer>
   </div>
 </template>
 
@@ -50,12 +51,18 @@ html, body {
 .main-row {
   display: flex;
   flex-direction: column;
+  margin-bottom: 100px;
 }
-#router-sidebar {
-  /*flex: 1;*/
+#footer {
+  min-height: 500px;
+  background-image: url('./assets/logo.png');
+  background-size: cover;
+  background-color: rgba(0,0,0,0.3);
+  width: 100%;
 }
-#router-main {
-  /*flex: 2;*/
+.logo {
+  max-height: 300px;
+  margin-bottom: 50px;
 }
 
 h1, h2 {

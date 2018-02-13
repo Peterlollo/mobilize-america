@@ -15,7 +15,6 @@ export const getEvents = ({commit}) => {
     })
     .catch(e => {
       commit(GET_EVENTS_FAILURE, e)
-      console.log('error: ', e)
     })
 }
 

@@ -3,33 +3,25 @@
     <div id="events">
       <h1>Events</h1>
       <div id='events-list' v-if='this.events.length'>
-        <div class='view-options'>
-          <button class='btn btn-secondary'
-            :class='{deactivated: mapShowing}'
-            v-on:click='hideMap'>
-            Event List
-          </button>
-          <button class='btn btn-secondary'
-            :class='{deactivated: !mapShowing}'
-            v-on:click='showMap'>
-            Event Map
-          </button>
-        </div>
-        <h2>{{msg}}</h2>
-        <div v-if='eventsToShow.length' id='events-table'>
-          <EventSingle v-for='event in eventsToShow' :event='event' :key='event.id'/>
-        </div>
-        <div v-else>No events in that range</div>
+        <ViewOptions />
+        <EventList v-if='!mapShowing'/>
+        <Map v-else/>
       </div>
-      <div v-else>Pardon us, there's an error somewhere. Please try again.</div>
+      <div v-else>
+        <div class='try-again'>
+          <h2>Pardon us, there's an error somewhere. Please try again.</h2>
+          <button class='btn sm' v-on:click='getEvents'>Find Events</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import EventSingle from './EventSingle'
-import { sortRecurringEventsByDate, filterEventsByZipcode } from '../helpers/eventHelpers'
+import { mapGetters, mapActions } from 'vuex'
+import EventList from './EventList'
+import ViewOptions from './ViewOptions'
+import Map from './Map'
 
 export default {
   name: 'Events',
@@ -43,25 +35,13 @@ export default {
     ...mapActions([ 'getEvents' ])
   },
   computed: {
-    eventsToShow () {
-      let zipcode = this.zipcodeSettings.zipcode
-      let distance = this.zipcodeSettings.distance
-      return zipcode ? filterEventsByZipcode(zipcode, distance, this.sortedEvents) : this.sortedEvents
-    },
-    sortedEvents () {
-      return sortRecurringEventsByDate(this.upcomingEvents)
-    },
-    ...mapGetters([ 'events', 'upcomingEvents', 'zipcodeSettings' ])
+    ...mapGetters(['events', 'mapShowing'])
   },
-  components: { EventSingle },
-  data () {
-    return {
-      mapShowing: false,
-      msg: 'Upcoming Events'
-    }
-  },
+  components: {EventList, ViewOptions, Map},
   created () {
-    this.getEvents()
+    if (!this.events.length) {
+      this.getEvents()
+    }
   }
 }
 </script>
@@ -71,7 +51,12 @@ export default {
   margin: 30px 0 0 0;
   padding: 10px 0 50px 0;
 }
-.deactivated {
-  background-color: #eee;
+.try-again {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sm {
+  width: 60%;
 }
 </style>

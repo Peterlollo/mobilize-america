@@ -25,6 +25,8 @@ export default {
   name: 'Map',
   computed: {
     center () {
+      // center map on user's zipcode if one has been entered
+      // else, center map on USA
       let usa = {lat: 38.2, lng: -100.4}
       let zipcodeData = this.zipcodeSettings
       if (zipcodeData.zipcode) {
@@ -36,6 +38,8 @@ export default {
       }
     },
     zoom () {
+      // if zipcode has been entered, zoom in the map
+      // else, use a wider zoom to show the entire USA
       let zipcodeData = this.zipcodeSettings
       if (zipcodeData.zipcode) {
         return 9
@@ -44,6 +48,9 @@ export default {
       }
     },
     markers () {
+      // format the events' location so they can be read by the maps module api
+      // for more info, visit:
+      // https://github.com/xkjyeah/vue-google-maps/blob/HEAD/API.md#position--lat-number-lng-number--googlemapslatlng-1
       return this.upcomingEvents.map((e) => {
         let lat = e.location.latitude
         let lng = e.location.longitude

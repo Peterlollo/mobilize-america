@@ -15,11 +15,14 @@ export default {
   name: 'EventList',
   computed: {
     eventsToShow () {
+      // show filtered events if user has entered a zipcode
+      // else show sorted events
       let zipcode = this.zipcodeSettings.zipcode
       let distance = this.zipcodeSettings.distance
       return zipcode ? filterEventsByZipcode(zipcode, distance, this.sortedEvents) : this.sortedEvents
     },
     sortedEvents () {
+      // sort event times so that they are in chronological order
       return sortRecurringEventsByDate(this.upcomingEvents)
     },
     ...mapGetters(['upcomingEvents', 'zipcodeSettings'])

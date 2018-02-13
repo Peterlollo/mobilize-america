@@ -20,6 +20,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import zipcodes from 'zipcodes'
 export default {
   name: 'Filters',
   data () {
@@ -36,6 +37,8 @@ export default {
   },
   methods: {
     validate (evt) {
+      // only allow numbers to be input
+      // && only zipcodes up to 5 digits in length
       evt = evt || window.event
       if (this.zipcode.toString().length > 4) {
         evt.preventDefault()
@@ -44,13 +47,16 @@ export default {
       }
     },
     toggle () {
+      // show or hide distance filters
       this.distanceShowing = !this.distanceShowing
     },
     clear () {
+      // reset zipcode and hide distance filters
       this.toggle()
       this.clearZipcode()
     },
     isNumber (evt) {
+      // only allow numbers
       var charCode = (evt.which) ? evt.which : evt.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
         evt.preventDefault()
@@ -58,10 +64,16 @@ export default {
         return true
       }
     },
-    setZipcode (distance) {
-      if (this.zipcode.length < 5 || this.zipcode.length > 5) {
+    setZipcode (distance) { // set zipcode in store if it passes validation
+      if (!zipcodes.lookup(this.zipcode)) {
+        // check for incorrect zipcodes
+        this.zipcodeError = 'Not an actual zipcode'
+      } else if (this.zipcode.length < 5 || this.zipcode.length > 5) {
+        // only allow zipcodes that are 5 digits in length
         this.zipcodeError = 'Zipcode must be five digits'
       } else {
+        // reset error to null and set zipcode in the store
+        this.zipcodeError = null
         let zipcode = this.zipcode
         this.filterByZipcode({zipcode, distance})
       }

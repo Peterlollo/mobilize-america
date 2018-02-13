@@ -86,7 +86,7 @@ export default {
 @media (min-width: 768px) {
   .map-container {
     width: 550px;
-    height: 400px;   
+    height: 400px;
   }
 }
 </style>
